@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location-Based Google Form</title>
+    <script>
+        function checkLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showFormBasedOnLocation, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showFormBasedOnLocation(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Example coordinates for a specific location
+            var allowedLatitude = -1.3967;  // Example: Latitude for Nairobi, Kenya
+            var allowedLongitude = 36.7484; // Example: Longitude for Nairobi, Kenya
+            var radius = 0.1; // 0.1 degrees ~ 11 km
+
+            if (Math.abs(latitude - allowedLatitude) <= radius && Math.abs(longitude - allowedLongitude) <= radius) {
+                document.getElementById('google-form').style.display = 'block';
+                document.getElementById('location-message').style.display = 'none';
+            } else {
+                document.getElementById('location-message').innerHTML = 'You are not in the allowed location to fill out this form.';
+            }
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    </script>
+</head>
+<body onload="checkLocation()">
+
+    <div id="location-message">Checking your location...</div>
+    <div id="google-form" style="display:none;">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSev8MB8-rT1IyH-kQ5HjrN6mICN3M04lNBUyeCbgz_5JQEJTA/viewform" width="640" height="480"></iframe>
+    </div>
+
+</body>
+</html>
