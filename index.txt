@@ -16,8 +16,8 @@
             var longitude = position.coords.longitude;
 
             // Example coordinates for a specific location
-            var allowedLatitude = -1.3906;  // Example: Latitude for Nairobi, Kenya
-            var allowedLongitude = 36.7679; // Example: Longitude for Nairobi, Kenya
+            var allowedLatitude = -1.3905;  // Example: Latitude for Nairobi, Kenya
+            var allowedLongitude = 36.7681; // Example: Longitude for Nairobi, Kenya
             var radius = 0.1; // 0.1 degrees ~ 11 km
 
             if (Math.abs(latitude - allowedLatitude) <= radius && Math.abs(longitude - allowedLongitude) <= radius) {
