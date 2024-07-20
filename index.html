@@ -2,6 +2,22 @@
 <html>
 <head>
     <title>Location-Based Google Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #google-form {
+            width: 100%;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
     <script>
         function checkLocation() {
             if (navigator.geolocation) {
@@ -15,9 +31,9 @@
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
 
-            // Example coordinates for a specific location
-            var allowedLatitude = -1.3905;  // Example: Latitude for Nairobi, Kenya
-            var allowedLongitude = 36.7681; // Example: Longitude for Nairobi, Kenya
+            // Coordinates for the specific location
+            var allowedLatitude = -1.3905;  
+            var allowedLongitude = 36.7681; 
             var radius = 0.1; // 0.1 degrees ~ 11 km
 
             if (Math.abs(latitude - allowedLatitude) <= radius && Math.abs(longitude - allowedLongitude) <= radius) {
@@ -31,7 +47,7 @@
         function showError(error) {
             switch (error.code) {
                 case error.PERMISSION_DENIED:
-                    alert("User denied the request for Geolocation.");
+                    alert("Access Denied.");
                     break;
                 case error.POSITION_UNAVAILABLE:
                     alert("Location information is unavailable.");
@@ -47,11 +63,9 @@
     </script>
 </head>
 <body onload="checkLocation()">
-
     <div id="location-message">Checking your location...</div>
     <div id="google-form" style="display:none;">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSev8MB8-rT1IyH-kQ5HjrN6mICN3M04lNBUyeCbgz_5JQEJTA/viewform" width="640" height="480"></iframe>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSev8MB8-rT1IyH-kQ5HjrN6mICN3M04lNBUyeCbgz_5JQEJTA/viewform?embedded=true"></iframe>
     </div>
-
 </body>
 </html>
